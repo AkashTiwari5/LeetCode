@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        # We only care about points between 0 and 1000 (given constraint)
+        diff = [0] * 1001
+
+        # Mark changes
+        for num, start, end in trips:
+            diff[start] += num       # pick up
+            diff[end] -= num         # drop off
+
+        curr = 0
+        for passengers in diff:
+            curr += passengers
+            if curr > capacity:
+                return False
+
+        return True
