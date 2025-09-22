@@ -1,0 +1,20 @@
+from typing import List
+
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        unique = set()
+        
+        for email in emails:
+            local, domain = email.split("@")
+            
+            # remove everything after +
+            if "+" in local:
+                local = local[:local.index("+")]
+            
+            # remove dots
+            local = local.replace(".", "")
+            
+            normalized = local + "@" + domain
+            unique.add(normalized)
+        
+        return len(unique)
