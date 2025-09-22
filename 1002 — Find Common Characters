@@ -1,0 +1,18 @@
+from typing import List
+from collections import Counter
+
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        # Start with character counts of the first word
+        common = Counter(words[0])
+
+        # Intersect with counts from the rest
+        for word in words[1:]:
+            common &= Counter(word)
+
+        # Expand to list (respecting counts)
+        result = []
+        for ch, freq in common.items():
+            result.extend([ch] * freq)
+        
+        return result
